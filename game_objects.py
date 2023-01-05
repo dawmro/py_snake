@@ -19,14 +19,20 @@ class Snake:
         self.rect = pg.rect.Rect([0, 0, game.TILE_SIZE, game.TILE_SIZE])
         # spawn snake on random tile
         self.rect.center = self.get_random_position()  
+        # set direction of snake movement to the right
+        self.direction = vec2(self.size, 0)
         
     # method to get random tile on board
     def get_random_position(self):
         return [randrange(self.size // 2, self.game.WINDOW_SIZE - self.size // 2, self.size)] * 2
         
+    # method to move snake
+    def move(self):
+        self.rect.move_ip(self.direction)
+        
     # method to update snake state  
     def update_state(self):
-        pass
+        self.move()
         
     # method to draw snake object
     def draw_object(self):
