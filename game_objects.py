@@ -17,3 +17,12 @@ class Snake:
         pass
         
     
+    
+# class of game object called food
+class Food:
+    def __init__(self, game):
+        pass
+        
+    # method to draw food object
+    def draw_object(self):
+        pass
