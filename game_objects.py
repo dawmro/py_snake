@@ -25,6 +25,10 @@ class Snake:
         self.move_delay = 200 # miliseconds
         # time reference variable
         self.time = 0
+        # length of snake
+        self.length = 1
+        # list of segments
+        self.segments = []
     
     # method to let user control snake movement
     def control(self, event):
@@ -60,6 +64,8 @@ class Snake:
         # if food eaten change it's position to new random tile
         if self.rect.center == self.game.food.rect.center:
             self.game.food.rect.center = self.get_random_position()
+            # increase snake length
+            self.length += 1
     
     # method to check if snake crossed the boundary
     def check_borders(self):
@@ -72,6 +78,10 @@ class Snake:
         # move snake only after sufficient time interval
         if self.time_delta():
             self.rect.move_ip(self.direction)
+            # write next snake position to list of segments
+            self.segments.append(self.rect.copy())
+            # cut list along snake length
+            self.segments = self.segments[-self.length:]
         
     # method to update snake state  
     def update_state(self):
@@ -81,8 +91,8 @@ class Snake:
         
     # method to draw snake object
     def draw_object(self):
-        # display snake
-        pg.draw.rect(self.game.screen, "green", self.rect)
+        # display each snake segment
+        [pg.draw.rect(self.game.screen, "green", segment) for segment in self.segments]
         
     
     
