@@ -29,7 +29,8 @@ class Game:
     
     # method to draw game object
     def draw_object(self):
-
+        # paint work surface black
+        self.screen.fill("black")
         
     # method to check for events
     def event_check(self):
