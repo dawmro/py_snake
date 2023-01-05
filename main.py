@@ -2,7 +2,7 @@
 
 import pygame as pg
 from game_objects import *
-
+import sys
 
 
 # class of main game 
@@ -34,7 +34,11 @@ class Game:
         
     # method to check for events
     def event_check(self):
-        pass
+        for event in pg.event.get():
+            # close game if QUIT button pressed 
+            if event.type == pg.QUIT:
+                pg.quit()
+                sys.exit()
         
     # method to start new game run
     def run(self):
