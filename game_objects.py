@@ -59,6 +59,13 @@ class Snake:
     def get_random_position(self):
         return [randrange(self.size // 2, self.game.WINDOW_SIZE - self.size // 2, self.size)] * 2
     
+    # check if snake bites its own tail
+    def check_tail_biting(self):
+        # check length of segments versus length of set of coordinates for each segment
+        if len(self.segments) != len(set(segment.center for segment in self.segments)):
+            # if snake bit his own tail (two segments are on the same coordinate) then lenghts are different, in that case start new game
+            self.game.new_game()
+    
     # method to check if snake and food positions are equal
     def check_food(self):
         # if food eaten change it's position to new random tile
@@ -85,6 +92,7 @@ class Snake:
         
     # method to update snake state  
     def update_state(self):
+        self.check_tail_biting()
         self.check_borders()
         self.check_food()
         self.move()
