@@ -21,6 +21,20 @@ class Snake:
         self.rect.center = self.get_random_position()  
         # set direction of snake movement to the right
         self.direction = vec2(self.size, 0)
+        # set delay between snake moves 
+        self.move_delay = 200 # miliseconds
+        # time reference variable
+        self.time = 0
+    
+    
+    # method to calculate time delta
+    def time_delta(self):
+        time_now = pg.time.get_ticks()
+        # return True if time greater than move_delay has elapsed
+        if time_now - self.time > self.move_delay:
+            self.time = time_now
+            return True
+        return False
         
     # method to get random tile on board
     def get_random_position(self):
@@ -28,7 +42,9 @@ class Snake:
         
     # method to move snake
     def move(self):
-        self.rect.move_ip(self.direction)
+        # move snake only after sufficient time interval
+        if self.time_delta():
+            self.rect.move_ip(self.direction)
         
     # method to update snake state  
     def update_state(self):
