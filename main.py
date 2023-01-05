@@ -22,11 +22,14 @@ class Game:
     
     # method to update game state
     def update_state(self):
-        pass
+        # update rendering surface
+        pg.display.flip()
+        # set number of frames per second
+        self.clock.tick(60)
     
     # method to draw game object
     def draw_object(self):
-        pass
+
         
     # method to check for events
     def event_check(self):
