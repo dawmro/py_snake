@@ -46,10 +46,10 @@ class Game:
         # paint work surface black
         self.screen.fill("black")
         self.draw_grid()
-        # display snake
-        self.snake.draw_object()
         # display food
         self.food.draw_object()
+        # display snake
+        self.snake.draw_object()
         
     # method to check for events
     def event_check(self):
