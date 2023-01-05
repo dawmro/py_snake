@@ -54,7 +54,13 @@ class Snake:
     # method to get random tile on board
     def get_random_position(self):
         return [randrange(self.size // 2, self.game.WINDOW_SIZE - self.size // 2, self.size)] * 2
-        
+    
+    # method to check if snake and food positions are equal
+    def check_food(self):
+        # if food eaten change it's position to new random tile
+        if self.rect.center == self.game.food.rect.center:
+            self.game.food.rect.center = self.get_random_position()
+    
     # method to move snake
     def move(self):
         # move snake only after sufficient time interval
@@ -63,6 +69,7 @@ class Snake:
         
     # method to update snake state  
     def update_state(self):
+        self.check_food()
         self.move()
         
     # method to draw snake object
