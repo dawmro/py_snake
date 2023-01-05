@@ -9,12 +9,20 @@ import sys
 class Game: 
     def __init__(self):
         pg.init()
-        # set window size
+        # set window and tile size
         self.WINDOW_SIZE = 800 
+        self.TILE_SIZE = 50
         # create rendering surface as square
         self.screen = pg.display.set_mode([self.WINDOW_SIZE, self.WINDOW_SIZE])
         # create instance of clock class to be able to set number of frames per second
         self.clock = pg.time.Clock()
+        
+    # method to draw grid on work surface
+    def draw_grid(self):
+        # draw vertical lines
+        [pg.draw.line(self.screen, [64] * 3, (x, 0), (x, self.WINDOW_SIZE)) for x in range(0, self.WINDOW_SIZE, self.TILE_SIZE)]
+        # draw horizontal lines
+        [pg.draw.line(self.screen, [64] * 3, (0, y), (self.WINDOW_SIZE, y)) for y in range(0, self.WINDOW_SIZE, self.TILE_SIZE)]
     
     # method to create new game
     def new_game(self):
@@ -31,6 +39,7 @@ class Game:
     def draw_object(self):
         # paint work surface black
         self.screen.fill("black")
+        self.draw_grid()
         
     # method to check for events
     def event_check(self):
