@@ -16,6 +16,7 @@ class Game:
         self.screen = pg.display.set_mode([self.WINDOW_SIZE, self.WINDOW_SIZE])
         # create instance of clock class to be able to set number of frames per second
         self.clock = pg.time.Clock()
+        self.new_game()
         
     # method to draw grid on work surface
     def draw_grid(self):
@@ -26,10 +27,15 @@ class Game:
     
     # method to create new game
     def new_game(self):
-        pass
+        # create instance of Snake
+        self.snake = Snake(self)
+        # create instance of Food
+        self.food = Food(self)
     
     # method to update game state
     def update_state(self):
+        # update snake state
+        self.snake.update_state()
         # update rendering surface
         pg.display.flip()
         # set number of frames per second
@@ -40,6 +46,10 @@ class Game:
         # paint work surface black
         self.screen.fill("black")
         self.draw_grid()
+        # display snake
+        self.snake.draw_object()
+        # display food
+        self.food.draw_object()
         
     # method to check for events
     def event_check(self):
