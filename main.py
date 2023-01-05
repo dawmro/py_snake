@@ -3,28 +3,28 @@
 import pygame as pg
 
 
-# main game class
+# class of main game 
 class Game: 
     def __init__(self):
         pass
     
-    # create new game
+    # method to create new game
     def new_game(self):
         pass
     
-    # update game state
+    # method to update game state
     def update_state(self):
         pass
     
-    # draw game object
+    # method to draw game object
     def draw_object(self):
         pass
         
-    # check for events
+    # method to check for events
     def event_check(self):
         pass
         
-    # start game run
+    # method to start new game run
     def run(self):
         pass
     
