@@ -75,7 +75,14 @@ class Snake:
 # class of game object called food
 class Food:
     def __init__(self, game):
-        pass
+        # assing aplication instance as attribute
+        self.game = game
+        # assing tile size as attribute to define snake size
+        self.size = game.TILE_SIZE
+        # make food a square
+        self.rect = pg.rect.Rect([0, 0, game.TILE_SIZE, game.TILE_SIZE])
+        # spawn food on random tile using method from Snake class
+        self.rect.center = self.game.snake.get_random_position()  
         
     # method to draw food object
     def draw_object(self):
