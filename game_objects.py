@@ -86,4 +86,4 @@ class Food:
         
     # method to draw food object
     def draw_object(self):
-        pass
+        pg.draw.rect(self.game.screen, "red", self.rect)
