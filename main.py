@@ -1,6 +1,7 @@
 # py_snake main file
 
 import pygame as pg
+from game_objects import *
 
 
 # class of main game 
