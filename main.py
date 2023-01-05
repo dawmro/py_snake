@@ -4,10 +4,17 @@ import pygame as pg
 from game_objects import *
 
 
+
 # class of main game 
 class Game: 
     def __init__(self):
-        pass
+        pg.init()
+        # set window size
+        self.WINDOW_SIZE = 800 
+        # create rendering surface as square
+        self.screen = pg.display.set_mode([self.WINDOW_SIZE, self.WINDOW_SIZE])
+        # create instance of clock class to be able to set number of frames per second
+        self.clock = pg.time.Clock()
     
     # method to create new game
     def new_game(self):
