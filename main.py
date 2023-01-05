@@ -42,7 +42,11 @@ class Game:
         
     # method to start new game run
     def run(self):
-        pass
+        # run all methods in a loop
+        while True:
+            self.event_check()
+            self.update_state()
+            self.draw_object()
     
     
 if __name__ == "__main__":
