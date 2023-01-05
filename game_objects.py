@@ -61,6 +61,12 @@ class Snake:
         if self.rect.center == self.game.food.rect.center:
             self.game.food.rect.center = self.get_random_position()
     
+    # method to check if snake crossed the boundary
+    def check_borders(self):
+        if (self.rect.left < 0) or (self.rect.right > self.game.WINDOW_SIZE) or (self.rect.top < 0) or (self.rect.bottom > self.game.WINDOW_SIZE):
+            self.game.new_game()
+        
+    
     # method to move snake
     def move(self):
         # move snake only after sufficient time interval
@@ -69,6 +75,7 @@ class Snake:
         
     # method to update snake state  
     def update_state(self):
+        self.check_borders()
         self.check_food()
         self.move()
         
