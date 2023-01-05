@@ -29,22 +29,32 @@ class Snake:
         self.length = 1
         # list of segments
         self.segments = []
+        # permisions for directions of movement
+        self.directions = {pg.K_w: True, pg.K_s: True, pg.K_a: True, pg.K_d: True}
     
     # method to let user control snake movement
     def control(self, event):
         if event.type == pg.KEYDOWN:
-            # move up
-            if event.key == pg.K_w:
+            # move up if allowed
+            if event.key == pg.K_w and self.directions[pg.K_w]:
                 self.direction = vec2(0, -self.size)
-            # move down
-            if event.key == pg.K_s:
+                # disallow to move down
+                self.directions = {pg.K_w: True, pg.K_s: False, pg.K_a: True, pg.K_d: True}
+            # move down if allowed
+            if event.key == pg.K_s and self.directions[pg.K_s]:
                 self.direction = vec2(0, self.size)
-            # move left
-            if event.key == pg.K_a:
+                # disallow to move up
+                self.directions = {pg.K_w: False, pg.K_s: True, pg.K_a: True, pg.K_d: True}
+            # move left if allowed
+            if event.key == pg.K_a and self.directions[pg.K_a]:
                 self.direction = vec2(-self.size, 0)
-            # move right
-            if event.key == pg.K_d:
+                # disallow to move right
+                self.directions = {pg.K_w: True, pg.K_s: True, pg.K_a: True, pg.K_d: False}
+            # move right if allowed
+            if event.key == pg.K_d and self.directions[pg.K_d]:
                 self.direction = vec2(self.size, 0)
+                # disallow to move left
+                self.directions = {pg.K_w: True, pg.K_s: True, pg.K_a: False, pg.K_d: True}
     
     # method to calculate time delta
     def time_delta(self):
