@@ -20,12 +20,27 @@ class Snake:
         # spawn snake on random tile
         self.rect.center = self.get_random_position()  
         # set direction of snake movement to the right
-        self.direction = vec2(self.size, 0)
+        self.direction = vec2(0, 0)
         # set delay between snake moves 
         self.move_delay = 200 # miliseconds
         # time reference variable
         self.time = 0
     
+    # method to let user control snake movement
+    def control(self, event):
+        if event.type == pg.KEYDOWN:
+            # move up
+            if event.key == pg.K_w:
+                self.direction = vec2(0, -self.size)
+            # move down
+            if event.key == pg.K_s:
+                self.direction = vec2(0, self.size)
+            # move left
+            if event.key == pg.K_a:
+                self.direction = vec2(-self.size, 0)
+            # move right
+            if event.key == pg.K_d:
+                self.direction = vec2(self.size, 0)
     
     # method to calculate time delta
     def time_delta(self):

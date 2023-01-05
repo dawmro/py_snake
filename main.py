@@ -58,7 +58,8 @@ class Game:
             if event.type == pg.QUIT:
                 pg.quit()
                 sys.exit()
-        
+            # control snake movement
+            self.snake.control(event)
     # method to start new game run
     def run(self):
         # run all methods in a loop
