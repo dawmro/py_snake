@@ -9,6 +9,7 @@ import sys
 class Game: 
     def __init__(self):
         pg.init()
+        pg.display.set_caption('py_snake')
         # set window and tile size
         self.WINDOW_SIZE = 800 
         self.TILE_SIZE = 50
