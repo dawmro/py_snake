@@ -5,6 +5,9 @@ from game_objects import *
 import sys
 
 
+
+
+
 # class of main game 
 class Game: 
     def __init__(self):
@@ -61,6 +64,7 @@ class Game:
                 sys.exit()
             # control snake movement
             self.snake.control(event)
+            
     # method to start new game run
     def run(self):
         # run all methods in a loop

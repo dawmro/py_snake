@@ -1,11 +1,16 @@
 # game objects file
 
 import pygame as pg
+import random
 from random import randrange
+import pathlib
 
 
 # two dimentional vector
 vec2 = pg.math.Vector2
+
+# food sprites location
+FOOD_SPRITES_DIR = 'assets/food'
 
 
 # class of game object called snake
@@ -83,13 +88,14 @@ class Snake:
             self.game.food.rect.center = self.get_random_position()
             # increase snake length
             self.length += 1
+            # change food image
+            self.game.food.select_random_image()
     
     # method to check if snake crossed the boundary
     def check_borders(self):
         if (self.rect.left < 0) or (self.rect.right > self.game.WINDOW_SIZE) or (self.rect.top < 0) or (self.rect.bottom > self.game.WINDOW_SIZE):
             self.game.new_game()
         
-    
     # method to move snake
     def move(self):
         # move snake only after sufficient time interval
@@ -121,16 +127,33 @@ class Food:
         self.game = game
         # assing tile size as attribute to define snake size
         self.size = game.TILE_SIZE
-        # load apple
-        self.apple = pg.image.load('images/apple.png').convert_alpha()
+        # load all food images
+        self.images = self.load_food_images()
+        # select random food image
+        self.image = random.choice(self.images)
         # make food a square
-        self.rect = pg.rect.Rect([0, 0, game.TILE_SIZE-5, game.TILE_SIZE-5])
+        #self.rect = pg.rect.Rect([0, 0, game.TILE_SIZE, game.TILE_SIZE])
+        # make food as chosen image
+        self.rect = self.image.get_rect()
         # spawn food on random tile using method from Snake class
         self.rect.center = self.game.snake.get_random_position()
-        
+    
+    # select random fruit image
+    def select_random_image(self):
+        self.image = random.choice(self.images)
+    
+    # method to load food images  
+    def load_food_images(self):
+        # get all png files
+        files = [item for item in pathlib.Path(FOOD_SPRITES_DIR).rglob('*.png') if item.is_file()]
+        # load images via pygame library tool
+        images = [pg.image.load(file).convert_alpha() for file in files]
+        # scale images to the size of tile
+        images = [pg.transform.scale(image, (self.size, self.size)) for image in images]
+        return images
         
     # method to draw food object
     def draw_object(self):
         #pg.draw.rect(self.game.screen, "red", self.rect)
-        # draw apple
-        self.game.screen.blit(self.apple, self.rect)
+        # draw random food
+        self.game.screen.blit(self.image, self.rect)
