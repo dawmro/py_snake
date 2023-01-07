@@ -121,11 +121,16 @@ class Food:
         self.game = game
         # assing tile size as attribute to define snake size
         self.size = game.TILE_SIZE
+        # load apple
+        self.apple = pg.image.load('images/apple.png').convert_alpha()
         # make food a square
-        self.rect = pg.rect.Rect([0, 0, game.TILE_SIZE, game.TILE_SIZE])
+        self.rect = pg.rect.Rect([0, 0, game.TILE_SIZE-5, game.TILE_SIZE-5])
         # spawn food on random tile using method from Snake class
-        self.rect.center = self.game.snake.get_random_position()  
+        self.rect.center = self.game.snake.get_random_position()
+        
         
     # method to draw food object
     def draw_object(self):
-        pg.draw.rect(self.game.screen, "red", self.rect)
+        #pg.draw.rect(self.game.screen, "red", self.rect)
+        # draw apple
+        self.game.screen.blit(self.apple, self.rect)
