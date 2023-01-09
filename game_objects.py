@@ -166,8 +166,12 @@ class Snake:
             if index == len(self.segments)-1:
                 # draw head image
                 self.game.screen.blit(self.head_up, segment)
+            # if segment is tail
+            elif index == 0:
+                # draw head tail
+                self.game.screen.blit(self.tail_up, segment)
             else:
-                # draw standard rectangle
+                # draw body image
                 self.game.screen.blit(self.body_horizontal, segment)
         
     
