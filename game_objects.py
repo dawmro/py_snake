@@ -155,7 +155,7 @@ class Snake:
         self.check_borders()
         self.check_food()
         self.move()
-        
+    
     # method to draw snake object
     def draw_object(self):
         # display each snake segment
@@ -165,7 +165,8 @@ class Snake:
             # if segment is head
             if index == len(self.segments)-1:
                 # draw head image
-                self.game.screen.blit(self.head_up, segment)
+                self.update_image_head()
+                self.game.screen.blit(self.head, segment)
             # if segment is tail
             elif index == 0:
                 # draw head tail
@@ -174,7 +175,16 @@ class Snake:
                 # draw body image
                 self.game.screen.blit(self.body_horizontal, segment)
         
-    
+    # method to update direction of head image
+    def update_image_head(self):
+        # based on available move directions decide direction of snake head
+        if self.directions[pg.K_s] == False: self.head = self.head_up
+        elif self.directions[pg.K_w] == False: self.head = self.head_down
+        elif self.directions[pg.K_d] == False: self.head = self.head_left
+        elif self.directions[pg.K_a] == False: self.head = self.head_right
+        else:
+            self.head = self.head_up
+        
     
 # class of game object called food
 class Food:
