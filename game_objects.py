@@ -162,6 +162,11 @@ class Snake:
         #[pg.draw.rect(self.game.screen, "green", segment) for segment in self.segments]
         # for each snake segment
         for index,segment in enumerate(self.segments):
+            #print(len(self.segments))
+            #print(self.segments[-1].center)
+            #if len(self.segments) > 1:
+             #   print(tuple(map(lambda i, j: i - j, self.segments[-1].center, self.segments[-2].center)))
+                #print(self.segments[-1].center - self.segments[-2].center)
             # if segment is head
             if index == len(self.segments)-1:
                 # draw head image
@@ -169,8 +174,9 @@ class Snake:
                 self.game.screen.blit(self.head, segment)
             # if segment is tail
             elif index == 0:
-                # draw head tail
-                self.game.screen.blit(self.tail_up, segment)
+                # draw tail image
+                self.update_image_tail()
+                self.game.screen.blit(self.tail, segment)
             else:
                 # draw body image
                 self.game.screen.blit(self.body_horizontal, segment)
@@ -184,6 +190,15 @@ class Snake:
         elif self.directions[pg.K_a] == False: self.head = self.head_right
         else:
             self.head = self.head_up
+            
+    # method to update direction of tail image
+    def update_image_tail(self):
+        # based on vectors between centers of two first segments decide tail direction
+        tail_tuple = tuple(map(lambda i, j: i - j, self.segments[1].center, self.segments[0].center))
+        if tail_tuple == (0,50): self.tail = self.tail_up
+        elif tail_tuple == (0,-50): self.tail = self.tail_down
+        elif tail_tuple == (50,0): self.tail = self.tail_left
+        elif tail_tuple == (-50,0): self.tail = self.tail_right   
         
     
 # class of game object called food
