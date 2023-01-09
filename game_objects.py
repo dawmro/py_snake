@@ -55,6 +55,8 @@ class Snake:
         self.eating_sound = pg.mixer.Sound('assets/sound/mlem.wav')
         # load game over bitten sound
         self.game_over_bitten_sound = pg.mixer.Sound('assets/sound/game_over_bitten.wav')
+        # load game over bounds sound
+        self.game_over_bounds_sound = pg.mixer.Sound('assets/sound/game_over_bounds.wav')
     
     # method to let user control snake movement
     def control(self, event):
@@ -98,7 +100,6 @@ class Snake:
         # check length of segments versus length of set of coordinates for each segment
         if len(self.segments) != len(set(segment.center for segment in self.segments)):
             # if snake bit his own tail (two segments are on the same coordinate) then lenghts are different, in that case start new game
-            print("game over")
             self.play_game_over_bitten_sound()
             self.game.new_game()
             
@@ -109,6 +110,10 @@ class Snake:
     # method to play game over bitten sound
     def play_game_over_bitten_sound(self):
         self.game_over_bitten_sound.play()
+      
+    # method to play game over bounds sound
+    def play_game_over_bounds_sound(self):
+        self.game_over_bounds_sound.play()
     
     # method to check if snake and food positions are equal
     def check_food(self):
@@ -125,6 +130,7 @@ class Snake:
     # method to check if snake crossed the boundary
     def check_borders(self):
         if (self.rect.left < 0) or (self.rect.right > self.game.WINDOW_SIZE) or (self.rect.top < 0) or (self.rect.bottom > self.game.WINDOW_SIZE):
+            self.play_game_over_bounds_sound()
             self.game.new_game()
         
     # method to move snake
