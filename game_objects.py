@@ -153,7 +153,16 @@ class Snake:
     # method to draw snake object
     def draw_object(self):
         # display each snake segment
-        [pg.draw.rect(self.game.screen, "green", segment) for segment in self.segments]
+        #[pg.draw.rect(self.game.screen, "green", segment) for segment in self.segments]
+        # for each snake segment
+        for index,segment in enumerate(self.segments):
+            # if segment is head
+            if index == 0:
+                # draw head image
+                self.game.screen.blit(self.head_up, self.rect)
+            else:
+                # draw standard rectangle
+                pg.draw.rect(self.game.screen, "green", segment)
         
     
     
