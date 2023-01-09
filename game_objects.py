@@ -168,7 +168,7 @@ class Snake:
                 self.game.screen.blit(self.head_up, segment)
             else:
                 # draw standard rectangle
-                pg.draw.rect(self.game.screen, "green", segment)
+                self.game.screen.blit(self.body_horizontal, segment)
         
     
     
