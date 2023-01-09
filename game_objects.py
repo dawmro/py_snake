@@ -20,6 +20,21 @@ class Snake:
         self.game = game
         # assing tile size as attribute to define snake size
         self.size = game.TILE_SIZE
+        # load snake body images
+        self.head_up = pg.image.load('assets/snake/head_up.png').convert_alpha()
+        self.head_down = pg.image.load('assets/snake/head_down.png').convert_alpha()
+        self.head_right = pg.image.load('assets/snake/head_right.png').convert_alpha()
+        self.head_left = pg.image.load('assets/snake/head_left.png').convert_alpha()
+        self.body_horizontal = pg.image.load('assets/snake/body_horizontal.png').convert_alpha()
+        self.body_vertical = pg.image.load('assets/snake/body_vertical.png').convert_alpha()
+        self.body_down_left = pg.image.load('assets/snake/body_down_left.png').convert_alpha()
+        self.body_down_right = pg.image.load('assets/snake/body_down_right.png').convert_alpha()
+        self.body_up_left = pg.image.load('assets/snake/body_up_left.png').convert_alpha()
+        self.body_up_right = pg.image.load('assets/snake/body_up_right.png').convert_alpha()
+        self.tail_up = pg.image.load('assets/snake/tail_up.png').convert_alpha()
+        self.tail_down = pg.image.load('assets/snake/tail_down.png').convert_alpha()
+        self.tail_right = pg.image.load('assets/snake/tail_right.png').convert_alpha()
+        self.tail_left = pg.image.load('assets/snake/tail_left.png').convert_alpha()
         # make snake a square
         self.rect = pg.rect.Rect([0, 0, game.TILE_SIZE, game.TILE_SIZE])
         # spawn snake on random tile
