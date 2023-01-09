@@ -163,9 +163,9 @@ class Snake:
         # for each snake segment
         for index,segment in enumerate(self.segments):
             # if segment is head
-            if index == 0:
+            if index == len(self.segments)-1:
                 # draw head image
-                self.game.screen.blit(self.head_up, self.rect)
+                self.game.screen.blit(self.head_up, segment)
             else:
                 # draw standard rectangle
                 pg.draw.rect(self.game.screen, "green", segment)
