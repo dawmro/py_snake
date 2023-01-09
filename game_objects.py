@@ -20,21 +20,27 @@ class Snake:
         self.game = game
         # assing tile size as attribute to define snake size
         self.size = game.TILE_SIZE
-        # load snake body images
-        self.head_up = pg.image.load('assets/snake/head_up.png').convert_alpha()
-        self.head_down = pg.image.load('assets/snake/head_down.png').convert_alpha()
-        self.head_right = pg.image.load('assets/snake/head_right.png').convert_alpha()
-        self.head_left = pg.image.load('assets/snake/head_left.png').convert_alpha()
-        self.body_horizontal = pg.image.load('assets/snake/body_horizontal.png').convert_alpha()
-        self.body_vertical = pg.image.load('assets/snake/body_vertical.png').convert_alpha()
-        self.body_down_left = pg.image.load('assets/snake/body_down_left.png').convert_alpha()
-        self.body_down_right = pg.image.load('assets/snake/body_down_right.png').convert_alpha()
-        self.body_up_left = pg.image.load('assets/snake/body_up_left.png').convert_alpha()
-        self.body_up_right = pg.image.load('assets/snake/body_up_right.png').convert_alpha()
-        self.tail_up = pg.image.load('assets/snake/tail_up.png').convert_alpha()
-        self.tail_down = pg.image.load('assets/snake/tail_down.png').convert_alpha()
-        self.tail_right = pg.image.load('assets/snake/tail_right.png').convert_alpha()
-        self.tail_left = pg.image.load('assets/snake/tail_left.png').convert_alpha()
+
+        # method to load and rescale images (runing method in constructor of not fully initialized object, idk if it's the best idea)
+        def load_and_rescale_image(name):
+            image = pg.image.load(f"assets/snake/{name}.png").convert_alpha()
+            return pg.transform.scale(image, (self.size, self.size))
+            
+        # load snake body images    
+        self.head_up = load_and_rescale_image("head_up")
+        self.head_down = load_and_rescale_image("head_down")
+        self.head_right = load_and_rescale_image("head_right")
+        self.head_left = load_and_rescale_image("head_left")
+        self.body_horizontal = load_and_rescale_image("body_horizontal")
+        self.body_vertical = load_and_rescale_image("body_vertical")
+        self.body_down_left = load_and_rescale_image("body_down_left")
+        self.body_down_right = load_and_rescale_image("body_down_right")
+        self.body_up_left = load_and_rescale_image("body_up_left")
+        self.body_up_right = load_and_rescale_image("body_up_right")
+        self.tail_up = load_and_rescale_image("tail_up")
+        self.tail_down = load_and_rescale_image("tail_down")
+        self.tail_right = load_and_rescale_image("tail_right")
+        self.tail_left = load_and_rescale_image("tail_left")
         # make snake a square
         self.rect = pg.rect.Rect([0, 0, game.TILE_SIZE, game.TILE_SIZE])
         # spawn snake on random tile
