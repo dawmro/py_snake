@@ -51,6 +51,8 @@ class Snake:
         self.segments = []
         # permisions for directions of movement
         self.directions = {pg.K_w: True, pg.K_s: True, pg.K_a: True, pg.K_d: True}
+        # load eating sound
+        self.eating_sound = pg.mixer.Sound('assets/sound/mlem.wav')
     
     # method to let user control snake movement
     def control(self, event):
@@ -95,6 +97,10 @@ class Snake:
         if len(self.segments) != len(set(segment.center for segment in self.segments)):
             # if snake bit his own tail (two segments are on the same coordinate) then lenghts are different, in that case start new game
             self.game.new_game()
+            
+    # method to play eating sound
+    def play_eating_sound(self):
+        self.eating_sound.play()
     
     # method to check if snake and food positions are equal
     def check_food(self):
@@ -105,6 +111,8 @@ class Snake:
             self.length += 1
             # change food image
             self.game.food.select_random_image()
+            # play eating sound
+            self.play_eating_sound()
     
     # method to check if snake crossed the boundary
     def check_borders(self):
