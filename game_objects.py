@@ -274,6 +274,5 @@ class Food:
         
     # method to draw food object
     def draw_object(self):
-        #pg.draw.rect(self.game.screen, "red", self.rect)
         # draw random food
         self.game.screen.blit(self.image, self.rect)
