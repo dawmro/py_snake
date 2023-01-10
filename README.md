@@ -24,3 +24,11 @@ Run python script:
 ``` sh
 python .\main.py
 ```
+
+## Controls:
+``` sh
+W - turn up
+A - turn left
+S - turn down
+D - turn right
+```
