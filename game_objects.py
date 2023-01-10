@@ -191,7 +191,10 @@ class Snake:
                     # draw horizontal body image
                     self.game.screen.blit(self.body_horizontal, segment)
                 else:
-                    pass
+                    # if tuple arguments points to up and left direction
+                    if previous_segment_tuple[0] == -50 and next_segment_tuple[1] == -50 or previous_segment_tuple[1] == -50 and next_segment_tuple[0]  == -50:
+                        # draw left up corner body image
+                        self.game.screen.blit(self.body_up_left, segment)
     # method to update direction of head image
     def update_image_head(self):
         # based on available move directions decide direction of snake head
