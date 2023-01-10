@@ -181,14 +181,17 @@ class Snake:
                 # draw body image
                 # based on vectors between centers of current and previous segments decide body direction
                 previous_segment_tuple = tuple(map(lambda i, j: i - j, self.segments[index + 1].center, segment.center))
-                # if first agument of tuple is zero it means snake is moving verical
-                if previous_segment_tuple[0] == 0:
+                next_segment_tuple = tuple(map(lambda i, j: i - j, self.segments[index - 1].center, segment.center))
+                # if first aguments of tuples are zero it means snake is moving verical
+                if previous_segment_tuple[0] == next_segment_tuple[0]:
                     # draw vertical body image
                     self.game.screen.blit(self.body_vertical, segment)
-                else:
+                # if second aguments of tuples are zero it means snake is moving horizontal
+                elif previous_segment_tuple[1] == next_segment_tuple[1]:
                     # draw horizontal body image
                     self.game.screen.blit(self.body_horizontal, segment)
-        
+                else:
+                    pass
     # method to update direction of head image
     def update_image_head(self):
         # based on available move directions decide direction of snake head
