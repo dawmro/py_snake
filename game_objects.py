@@ -13,6 +13,7 @@ vec2 = pg.math.Vector2
 FOOD_SPRITES_DIR = 'assets/food'
 
 
+
 # class of game object called snake
 class Snake:
     def __init__(self, game):
@@ -64,6 +65,7 @@ class Snake:
         # load game over bounds sound
         self.game_over_bounds_sound = pg.mixer.Sound('assets/sound/game_over_bounds.wav')
     
+    
     # method to let user control snake movement
     def control(self, event):
         if event.type == pg.KEYDOWN:
@@ -88,6 +90,7 @@ class Snake:
                 # disallow to move left
                 self.directions = {pg.K_w: True, pg.K_s: True, pg.K_a: False, pg.K_d: True}
     
+    
     # method to calculate time delta
     def time_delta(self):
         time_now = pg.time.get_ticks()
@@ -96,10 +99,12 @@ class Snake:
             self.time = time_now
             return True
         return False
-        
+     
+     
     # method to get random tile on board
     def get_random_position(self):
         return [randrange(self.size // 2, self.game.WINDOW_SIZE - self.size // 2, self.size)] * 2
+    
     
     # check if snake bites its own tail
     def check_tail_biting(self):
@@ -108,18 +113,22 @@ class Snake:
             # if snake bit his own tail (two segments are on the same coordinate) then lenghts are different, in that case start new game
             self.play_game_over_bitten_sound()
             self.game.new_game()
-            
+     
+     
     # method to play eating sound
     def play_eating_sound(self):
         self.eating_sound.play()
-        
+     
+     
     # method to play game over bitten sound
     def play_game_over_bitten_sound(self):
         self.game_over_bitten_sound.play()
       
+      
     # method to play game over bounds sound
     def play_game_over_bounds_sound(self):
         self.game_over_bounds_sound.play()
+    
     
     # method to check if snake and food positions are equal
     def check_food(self):
@@ -133,12 +142,14 @@ class Snake:
             # play eating sound
             self.play_eating_sound()
     
+    
     # method to check if snake crossed the boundary
     def check_borders(self):
         if (self.rect.left < 0) or (self.rect.right > self.game.WINDOW_SIZE) or (self.rect.top < 0) or (self.rect.bottom > self.game.WINDOW_SIZE):
             self.play_game_over_bounds_sound()
             self.game.new_game()
-        
+     
+     
     # method to move snake
     def move(self):
         # move snake only after sufficient time interval
@@ -148,7 +159,8 @@ class Snake:
             self.segments.append(self.rect.copy())
             # cut list along snake length
             self.segments = self.segments[-self.length:]
-        
+      
+      
     # method to update snake state  
     def update_state(self):
         self.check_tail_biting()
@@ -156,17 +168,11 @@ class Snake:
         self.check_food()
         self.move()
     
+    
     # method to draw snake object
     def draw_object(self):
-        # display each snake segment
-        #[pg.draw.rect(self.game.screen, "green", segment) for segment in self.segments]
         # for each snake segment
         for index,segment in enumerate(self.segments):
-            #print(len(self.segments))
-            #print(self.segments[-1].center)
-            #if len(self.segments) > 1:
-             #   print(tuple(map(lambda i, j: i - j, self.segments[-1].center, self.segments[-2].center)))
-                #print(self.segments[-1].center - self.segments[-2].center)
             # if segment is head
             if index == len(self.segments)-1:
                 # draw head image
@@ -207,7 +213,8 @@ class Snake:
                     elif previous_segment_tuple[0] == 50 and next_segment_tuple[1] == 50 or previous_segment_tuple[1] == 50 and next_segment_tuple[0]  == 50:
                         # draw down right corner body image
                         self.game.screen.blit(self.body_down_right, segment)
-                        
+          
+          
     # method to update direction of head image
     def update_image_head(self):
         # based on available move directions decide direction of snake head
@@ -217,7 +224,8 @@ class Snake:
         elif self.directions[pg.K_a] == False: self.head = self.head_right
         else:
             self.head = self.head_up
-            
+           
+           
     # method to update direction of tail image
     def update_image_tail(self):
         # based on vectors between centers of two first segments decide tail direction
@@ -227,6 +235,7 @@ class Snake:
         elif tail_tuple == (50,0): self.tail = self.tail_left
         elif tail_tuple == (-50,0): self.tail = self.tail_right   
         
+    
     
 # class of game object called food
 class Food:
@@ -246,9 +255,11 @@ class Food:
         # spawn food on random tile using method from Snake class
         self.rect.center = self.game.snake.get_random_position()
     
+    
     # select random fruit image
     def select_random_image(self):
         self.image = random.choice(self.images)
+    
     
     # method to load food images  
     def load_food_images(self):
@@ -259,6 +270,7 @@ class Food:
         # scale images to the size of tile
         images = [pg.transform.scale(image, (self.size, self.size)) for image in images]
         return images
+        
         
     # method to draw food object
     def draw_object(self):

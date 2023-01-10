@@ -6,8 +6,6 @@ import sys
 
 
 
-
-
 # class of main game 
 class Game: 
     def __init__(self):
@@ -22,6 +20,7 @@ class Game:
         self.clock = pg.time.Clock()
         self.new_game()
         
+        
     # method to draw grid on work surface
     def draw_grid(self):
         # draw vertical lines
@@ -29,12 +28,14 @@ class Game:
         # draw horizontal lines
         [pg.draw.line(self.screen, [64] * 3, (0, y), (self.WINDOW_SIZE, y)) for y in range(0, self.WINDOW_SIZE, self.TILE_SIZE)]
     
+    
     # method to create new game
     def new_game(self):
         # create instance of Snake
         self.snake = Snake(self)
         # create instance of Food
         self.food = Food(self)
+    
     
     # method to update game state
     def update_state(self):
@@ -44,6 +45,7 @@ class Game:
         pg.display.flip()
         # set number of frames per second
         self.clock.tick(60)
+    
     
     # method to draw game object
     def draw_object(self):
@@ -55,6 +57,7 @@ class Game:
         # display snake
         self.snake.draw_object()
         
+        
     # method to check for events
     def event_check(self):
         for event in pg.event.get():
@@ -65,6 +68,7 @@ class Game:
             # control snake movement
             self.snake.control(event)
             
+            
     # method to start new game run
     def run(self):
         # run all methods in a loop
@@ -72,6 +76,7 @@ class Game:
             self.event_check()
             self.update_state()
             self.draw_object()
+    
     
     
 if __name__ == "__main__":
