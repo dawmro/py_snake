@@ -199,6 +199,10 @@ class Snake:
                     elif previous_segment_tuple[0] == 50 and next_segment_tuple[1] == -50 or previous_segment_tuple[1] == -50 and next_segment_tuple[0]  == 50:
                         # draw up right corner body image
                         self.game.screen.blit(self.body_up_right, segment)
+                    # if tuple arguments points to down and left direction
+                    elif previous_segment_tuple[0] == -50 and next_segment_tuple[1] == 50 or previous_segment_tuple[1] == 50 and next_segment_tuple[0]  == -50:
+                        # draw down left corner body image
+                        self.game.screen.blit(self.body_down_left, segment)
                     
     # method to update direction of head image
     def update_image_head(self):
